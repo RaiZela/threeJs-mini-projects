@@ -1,0 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+body{
+    background-color: black;
+}
+
+.draw{
+    position: fix;
+    left:0px;
+    top:0px;
+    outline: none;
+}
