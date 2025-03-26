@@ -29,6 +29,20 @@ const canvas = document.querySelector(".draw"); //select the canvas
 const renderer = new THREE.WebGLRenderer({ canvas }); //add Webgl Renderer
 renderer.setSize(aspect.width, aspect.height); //renderer size
 
+//Resizing
+window.addEventListener("resize", () => {
+  //new size
+  aspect.width = window.innerWidth;
+  aspect.height = window.innerHeight;
+
+  //new AspectRatio
+  camera.aspect = aspect.width / aspect.height;
+  camera.updateProjectionMatrix();
+
+  //new RendererSize
+  renderer.setSize(aspect.width, aspect.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
 //Clock Class
 const clock = new THREE.Clock();
 
