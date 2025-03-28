@@ -1,16 +1,25 @@
 import "./style.css";
 import * as THREE from "three";
 import gsap from "gsap";
-
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 //Scene Mesh Camera Renderer
 
 //SCEENE
-
 const scene = new THREE.Scene();
 
 //MESH
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: "purple" });
+const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
+// const geometry = new THREE.BufferGeometry();
+// const verticesArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
+
+// const positionsAttributes = new THREE.BufferAttribute(verticesArray, 3);
+
+// geometry.setAttribute("position", positionsAttributes);
+
+const material = new THREE.MeshBasicMaterial({
+  color: "purple",
+  wireframe: true,
+});
 const mesh = new THREE.Mesh(geometry, material);
 
 scene.add(mesh);
@@ -28,6 +37,11 @@ scene.add(camera);
 const canvas = document.querySelector(".draw"); //select the canvas
 const renderer = new THREE.WebGLRenderer({ canvas }); //add Webgl Renderer
 renderer.setSize(aspect.width, aspect.height); //renderer size
+
+//OrbitControls
+const orbitControls = new OrbitControls(camera, canvas);
+
+//mesh.position.x = 3; //per te par qe kamera rrotullohet rreth objektit dhe jo objekti ndaj vetes
 
 //Resizing
 window.addEventListener("resize", () => {
@@ -51,8 +65,8 @@ const animate = () => {
   const elapsedTime = clock.getElapsedTime();
 
   //Linear Function
-  mesh.position.x = Math.tan(elapsedTime);
-  mesh.position.y = Math.tan(elapsedTime);
+  // mesh.position.x = Math.tan(elapsedTime);
+  //mesh.position.y = Math.tan(elapsedTime);
 
   //Update.rotation on X axis
   //mesh.rotation.y = elapsedTime * 0.25; //the cube will rotate half a turn every second, so Math.PI is how much we want for the cube to rotate
